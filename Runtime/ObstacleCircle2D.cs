@@ -17,27 +17,25 @@ namespace Nebukam.Beacon.ORCA
         protected override void BuildObstacles()
         {
 
-            //TODO : Re-use existing obstacles & vertices
-            Nebukam.ORCA.Obstacle obstacle = new Nebukam.ORCA.Obstacle();
+            SetObstacleCount(1);
+            Nebukam.ORCA.Obstacle o = SetObstacleLength(0, samples);
 
             Vector2 offset = colliderComponent.offset;
-            float3 pos = transform.position, refloat3 = float3(0f, colliderComponent.radius, 0f);
+            float3 pos = transform.position, pt = float3(0f, colliderComponent.radius, pos.z), zero = float3(false);
             quaternion rot = transform.rotation;
             float inc = Maths.TAU / samples;
 
             float3 Project(int sample)
             {
-                float3 proj = Maths.RotateAroundPivot(float3(refloat3.x, refloat3.y, pos.z), float3(false), float3(0f, 0f, inc * sample));
+                float3 proj = Maths.RotateAroundPivot(pt, zero, float3(0f, 0f, inc * sample));
                 proj.x += offset.x; proj.y += offset.y; proj.z = pos.z;
-                proj = Maths.RotateAroundPivot(proj, float3(false), rot);
+                proj = Maths.RotateAroundPivot(proj, zero, rot);
                 proj.x += pos.x; proj.y += pos.y; proj.z = pos.z;
                 return proj;
             }
 
             for (int i = 0; i < samples; i++)
-                obstacle.Add(Project(i));
-
-            m_obstacles.Add(obstacle);
+                o[i].pos = Project(i);
 
         }
 

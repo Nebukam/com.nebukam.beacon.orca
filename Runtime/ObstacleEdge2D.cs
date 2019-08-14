@@ -13,17 +13,16 @@ namespace Nebukam.Beacon.ORCA
         protected override void BuildObstacles()
         {
 
-            //TODO : Re-use existing obstacles & vertices
-            Nebukam.ORCA.Obstacle obstacle = new Nebukam.ORCA.Obstacle();
+            SetObstacleCount(1);
 
-            Vector2[] points;
+            Vector2[] points = colliderComponent.points;
             Vector2 offset = colliderComponent.offset;
             float3 pos = transform.position;
             quaternion rot = transform.rotation;
+            int count = points.Length;
 
-            obstacle.edge = true;
-
-            points = colliderComponent.points;
+            Nebukam.ORCA.Obstacle o = SetObstacleLength(0, count);
+            o.edge = true;
 
             float3 Project(Vector2 pt)
             {
@@ -32,10 +31,8 @@ namespace Nebukam.Beacon.ORCA
                 return proj;
             }
 
-            for (int i = 0, count = points.Length; i < count; i++)
-                obstacle.Add(Project(points[i]));
-
-            m_obstacles.Add(obstacle);
+            for (int i = 0; i < count; i++)
+                o[i].pos = Project(points[i]);
 
         }
 

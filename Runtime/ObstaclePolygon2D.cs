@@ -17,7 +17,7 @@ namespace Nebukam.Beacon.ORCA
         protected override void BuildObstacles()
         {
 
-            int pathCount = colliderComponent.pathCount;
+            int pathCount = SetObstacleCount(colliderComponent.pathCount);
 
             Vector2[] points;
             Vector2 offset = colliderComponent.offset;
@@ -31,17 +31,16 @@ namespace Nebukam.Beacon.ORCA
                 return proj;
             }
 
-            Nebukam.ORCA.Obstacle subObstacle;
+            Nebukam.ORCA.Obstacle o;
+            int length;
             for (int p = 0; p < pathCount; p++)
             {
-
-                subObstacle = new Nebukam.ORCA.Obstacle();
                 points = colliderComponent.GetPath(p);
+                length = points.Length;
+                o = SetObstacleLength(p, length);
 
-                for (int i = 0, count = points.Length; i < count; i++)
-                    subObstacle.Add(Project(points[i]));
-
-                m_obstacles.Add(subObstacle);
+                for (int i = 0; i < length; i++)
+                    o[i].pos = Project(points[i]);
 
             }
 

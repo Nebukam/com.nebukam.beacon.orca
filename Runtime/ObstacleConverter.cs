@@ -26,9 +26,11 @@ namespace Nebukam.Beacon.ORCA
         [Tooltip("Collider Component reference. If left empty, will attempt to grab one using GetComponent().")]
         public T colliderComponent = null;
         [Header("ORCA Properties")]
+        [Tooltip("Dynamic obstacles are recomputed each frame. Check this if you intent to move or manipulate the collider often.")]
+        public bool dynamic = false;
         [Tooltip("Whether this ORCA Obstacle collision is enabled.")]
         public bool collisionEnabled = true;
-        [Tooltip("Whether this ORCA Obstacle collision is enabled.")]
+        [Tooltip("Layers occupied by this Obstacle")]
         public Nebukam.ORCA.ORCALayer layerOccupation = Nebukam.ORCA.ORCALayer.ALL;
         [Tooltip("Obstacle's height"), Range(0f, 100f)]
         public float height = 1.0f;
@@ -70,7 +72,43 @@ namespace Nebukam.Beacon.ORCA
                 m_obstacles[i].collisionEnabled = false;
         }
 
+        protected int SetObstacleCount(int count)
+        {
+            int oCount = m_obstacles.Count;
+            if(oCount == count) { return count; }
+            while(oCount != count)
+            {
+                if(oCount < count)
+                    m_obstacles.Add(new Nebukam.ORCA.Obstacle());
+                else
+                    m_obstacles.Pop().Clear();
+                oCount = m_obstacles.Count;
+            }
+            return count;
+        }
+
+        protected Nebukam.ORCA.Obstacle SetObstacleLength(int index, int length)
+        {
+            Nebukam.ORCA.Obstacle o = m_obstacles[index];
+            int oLength = o.Count;
+            if (oLength == length) { return o; }
+            while (oLength != length)
+            {
+                if (oLength < length)
+                    o.Add(float3(false));
+                else
+                    o.Pop();
+                oLength = o.Count;
+            }
+            return o;
+        }
+
         protected abstract void BuildObstacles();
+
+        private void Update()
+        {
+            if (dynamic) { BuildObstacles(); }
+        }
 
 #if UNITY_EDITOR
 
