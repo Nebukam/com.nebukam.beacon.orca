@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nebukam.Signals;
 using Unity.Mathematics;
 using UnityEngine;
 using static Unity.Mathematics.math;
+using Nebukam.Signals;
+using Nebukam.Common;
 using Nebukam.ORCA;
 
 namespace Nebukam.Beacon.ORCA
 {
-
+    [AddComponentMenu("Nebukam/Beacon/ORCA/ORCA Beacon Processor")]
     public class ORCABeaconProcessor : BeaconProcessor
     {
 
-        
+        public AxisPair plane = AxisPair.XY;
+
         public float radius = 0.5f;
         public float radiusObst = 0.5f;
         public float maxSpeed = 20.0f;
@@ -60,6 +62,8 @@ namespace Nebukam.Beacon.ORCA
         {
             if (m_agent == null) { return; }
 
+            float3 pos = transform.position;
+            m_agent.pos = pos;
             m_agent.navigationEnabled = navigationEnabled;
             m_agent.collisionEnabled = collisionEnabled;
         }
