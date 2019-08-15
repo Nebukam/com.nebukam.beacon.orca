@@ -4,7 +4,6 @@ using Unity.Mathematics;
 using UnityEngine;
 using static Unity.Mathematics.math;
 using Nebukam.Signals;
-using Nebukam.Common;
 using Nebukam.ORCA;
 
 namespace Nebukam.Beacon.ORCA
