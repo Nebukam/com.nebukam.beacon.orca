@@ -23,18 +23,18 @@ namespace Nebukam.Beacon.ORCA
 
         public bool drawDebug = true;
         [Header("Collider")]
-        [Tooltip("Collider Component reference. If left empty, will attempt to grab one using GetComponent().")]
+        [Tooltip("Collider Component reference. If left empty, will attempt to grab one using GetComponent()")]
         public T colliderComponent = null;
         [Header("ORCA Properties")]
-        [Tooltip("Dynamic obstacles are recomputed each frame. Check this if you intent to move or manipulate the collider often.")]
+        [Tooltip("Dynamic obstacles are recomputed each frame. Check this if you intent to move or manipulate the collider often")]
         public bool dynamic = false;
-        [Tooltip("Whether this ORCA Obstacle collision is enabled.")]
+        [Tooltip("Whether this ORCA Obstacle collision is enabled")]
         public bool collisionEnabled = true;
         [Tooltip("Layers occupied by this Obstacle")]
-        public Nebukam.ORCA.ORCALayer layerOccupation = Nebukam.ORCA.ORCALayer.ALL;
-        [Tooltip("Obstacle's height"), Range(0f, 100f)]
+        public Nebukam.ORCA.ORCALayer layerOccupation = Nebukam.ORCA.ORCALayer.ANY;
+        [Tooltip("Obstacle's height [0,100]"), Range(0f, 100f)]
         public float height = 1.0f;
-        [Tooltip("Obstacle's thickness"), Range(0f, 10f)]
+        [Tooltip("Obstacle's thickness [0,10]"), Range(0f, 10f)]
         public float thickness = 0.0f;
 
         private void Awake()
