@@ -10,7 +10,9 @@ namespace Nebukam.Beacon.ORCA
     {
 
         [Header("Settings")]
-        [Tooltip("Always update Agent. Use this is you intend to modify ORCA Settings often.")]
+        [Tooltip("When true, the component will create and manage the agent itself.\nOtherwise, you are responsible for providing this component with an Agent.")]
+        public bool selfManaged = true;
+        [Tooltip("Always update Agent. Use this is you intend to modify agent's settings often.")]
         public bool alwaysUpdate = false;
 
         [Header("Template")]
