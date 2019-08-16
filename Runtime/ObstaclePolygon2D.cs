@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Nebukam.Utils;
 using Unity.Mathematics;
 using UnityEngine;
 using static Unity.Mathematics.math;
-using Nebukam.Signals;
-using Nebukam.Utils;
 
 namespace Nebukam.Beacon.ORCA
 {

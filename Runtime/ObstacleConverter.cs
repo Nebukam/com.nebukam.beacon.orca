@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Nebukam.Utils;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using static Unity.Mathematics.math;
-using Nebukam.Signals;
-using Nebukam.Utils;
 
 namespace Nebukam.Beacon.ORCA
 {
     public abstract class BaseObstacleConverter : MonoBehaviour
     {
-
+#if UNITY_EDITOR
+        public bool drawDebug = true;
+#endif
         protected List<Nebukam.ORCA.Obstacle> m_obstacles = new List<Nebukam.ORCA.Obstacle>();
         public List<Nebukam.ORCA.Obstacle> obstacles { get { return m_obstacles; } }
 
@@ -20,7 +20,6 @@ namespace Nebukam.Beacon.ORCA
     where T : Component
     {
 
-        public bool drawDebug = true;
         [Header("Collider")]
         [Tooltip("Collider Component reference. If left empty, will attempt to grab one using GetComponent()")]
         public T colliderComponent = null;
@@ -78,9 +77,9 @@ namespace Nebukam.Beacon.ORCA
             while(oCount != count)
             {
                 if(oCount < count)
-                    m_obstacles.Add(new Nebukam.ORCA.Obstacle());
+                    m_obstacles.Add(Pooling.Pool.Rent<Nebukam.ORCA.Obstacle>());
                 else
-                    m_obstacles.Pop().Clear();
+                    m_obstacles.Pop().Clear(true);
                 oCount = m_obstacles.Count;
             }
             return count;
@@ -96,7 +95,7 @@ namespace Nebukam.Beacon.ORCA
                 if (oLength < length)
                     o.Add(float3(false));
                 else
-                    o.Pop();
+                    o.Pop(true);
                 oLength = o.Count;
             }
             return o;
