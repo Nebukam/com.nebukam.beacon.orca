@@ -23,7 +23,7 @@ using Unity.Mathematics;
 
 namespace Nebukam.Beacon.ORCA
 {
-    public class ORCABundle<AgentType> : System.IDisposable
+    public class ORCABundle<AgentType> : System.IDisposable, IPlanar
         where AgentType : Agent, IAgent, new()
     {
 
@@ -31,15 +31,25 @@ namespace Nebukam.Beacon.ORCA
         protected ObstacleGroup m_staticObstacles = new ObstacleGroup();
         protected ObstacleGroup m_dynamicObstacles = new ObstacleGroup();
         protected Nebukam.ORCA.ORCA m_orca;
+        protected AxisPair m_plane = AxisPair.XY;
 
         public AgentGroup<AgentType> agent { get { return m_agents; } }
         public ObstacleGroup staticObstacles { get { return m_staticObstacles; } }
         public ObstacleGroup dynamicObstacles { get { return m_dynamicObstacles; } }
         public Nebukam.ORCA.ORCA orca { get { return m_orca; } }
+        public AxisPair plane {
+            get { return m_plane; }
+            set
+            {
+                m_plane = value;
+                m_orca.plane = value;
+            }
+        }
 
         public ORCABundle()
         {
             m_orca = new Nebukam.ORCA.ORCA();
+            m_orca.plane = m_plane;
 
             m_orca.agents = m_agents;
             m_orca.staticObstacles = m_staticObstacles;
