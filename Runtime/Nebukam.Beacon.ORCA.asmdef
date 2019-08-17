@@ -2,15 +2,14 @@
     "name": "Nebukam.Beacon.ORCA",
     "references": [
         "Unity.Burst",
-        "Unity.Mathematics",
         "Unity.Collections",
         "Unity.Jobs",
+        "Unity.Mathematics",
         "Nebukam.Common",
-        "Nebukam.Utils",
         "Nebukam.JobAssist",
-		"Nebukam.Signals",
-		"Nebukam.Beacon",
-		"Nebukam.ORCA"
+        "Nebukam.Signals",
+        "Nebukam.Beacon",
+        "Nebukam.ORCA"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
