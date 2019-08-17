@@ -30,7 +30,7 @@ namespace Nebukam.Beacon.ORCA
     public class ObstacleEdge2D : ObstacleConverter<EdgeCollider2D>
     {
         
-        [Header("Edge")]
+        [Header("Edge (experimental)")]
         [Tooltip("[EXPERIMENTAL] Double-sided edge collides from both sides.")]
         public bool doubleSided = false;
 
