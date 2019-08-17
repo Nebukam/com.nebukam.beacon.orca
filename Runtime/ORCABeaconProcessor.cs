@@ -10,7 +10,8 @@ namespace Nebukam.Beacon.ORCA
     {
 
         [Header("Settings")]
-        [Tooltip("When true, the component will create and manage the agent itself.\nOtherwise, you are responsible for providing this component with an Agent.")]
+        [Tooltip("When true, the component will create and manage the agent itself and register it to the default bundle.\n" +
+            "Otherwise, you are responsible for providing this component with an Agent.")]
         public bool selfManaged = true;
         [Tooltip("Always update Agent. Use this is you intend to modify agent's settings often.")]
         public bool alwaysUpdate = false;
@@ -49,22 +50,29 @@ namespace Nebukam.Beacon.ORCA
             get { return m_agent; }
             set
             {
-                if(m_agent == value) { return; }
+                if(m_agent == value)
+                    return;
+
+                if (selfManaged && m_agent != null)
+                    m_agent.Release();
+
                 m_agent = value;
-                m_agent.pos = transform.position;
-                UpdateAgentSettings();
+
+                if (m_agent != null)
+                {
+                    m_agent.pos = transform.position;
+                    UpdateAgentSettings();
+                }
             }
         }
 
         private void Awake()
         {
-
+            
         }
 
         public void UpdateAgentSettings()
         {
-            if(m_agent == null) { return; }
-
             m_agent.radius = radius;
             m_agent.radiusObst = radiusObst;
             m_agent.maxSpeed = controller.speed;
@@ -80,7 +88,12 @@ namespace Nebukam.Beacon.ORCA
 
         private void OnEnable()
         {
-            if (m_agent == null) { return; }
+
+            if (selfManaged)
+                agent = ORCABeacon.Get.defaultBundle.NewAgent(transform.position);
+
+            if (m_agent == null)
+                return;
 
             m_agent.pos = transform.position;
             m_agent.navigationEnabled = navigationEnabled;
@@ -89,6 +102,9 @@ namespace Nebukam.Beacon.ORCA
 
         private void OnDisable()
         {
+            if (selfManaged)
+                agent = null;
+
             if (m_agent == null) { return; }
 
             m_agent.navigationEnabled = false;
@@ -116,7 +132,8 @@ namespace Nebukam.Beacon.ORCA
         {
             if(m_agent == null) { return; }
 
-            if (alwaysUpdate) { UpdateAgentSettings(); }
+            if (alwaysUpdate)
+                UpdateAgentSettings();
             
             if (!m_agent.navigationEnabled)
             {
@@ -141,6 +158,11 @@ namespace Nebukam.Beacon.ORCA
             heading = m_agent.velocity;
             velocity = m_agent.velocity;
 
+        }
+
+        private void OnDestroy()
+        {
+            agent = null;
         }
 
     }

@@ -8,9 +8,14 @@ namespace Nebukam.Beacon.ORCA
 {
     public abstract class BaseObstacleConverter : MonoBehaviour
     {
+        [Header("Settings")]
 #if UNITY_EDITOR
         public bool drawDebug = true;
 #endif
+        [Tooltip("When true, obstacles will be registered to the default bundle.\n" +
+            "Otherwise, you are responsible for registering the obstacles manually.")]
+        public bool selfManaged = true;
+
         protected List<Nebukam.ORCA.Obstacle> m_obstacles = new List<Nebukam.ORCA.Obstacle>();
         public List<Nebukam.ORCA.Obstacle> obstacles { get { return m_obstacles; } }
 
@@ -24,8 +29,10 @@ namespace Nebukam.Beacon.ORCA
         [Tooltip("Collider Component reference. If left empty, will attempt to grab one using GetComponent()")]
         public T colliderComponent = null;
         [Header("ORCA Properties")]
-        [Tooltip("Dynamic obstacles are recomputed each frame. Check this if you intent to move or manipulate the collider often")]
+        [Tooltip("Dynamic obstacles are recomputed each frame in the simulation. Check this if you intent to move or manipulate the collider often")]
         public bool dynamic = false;
+        [Tooltip("If checked, obstacle vertices are recomputed each frame. Only if dynamic.")]
+        public bool alwaysUpdate = false;
         [Tooltip("Whether this ORCA Obstacle collision is enabled")]
         public bool collisionEnabled = true;
         [Tooltip("Layers occupied by this Obstacle")]
@@ -55,6 +62,15 @@ namespace Nebukam.Beacon.ORCA
             for (int i = 0, count = m_obstacles.Count; i < count; i++)
             {
                 o = m_obstacles[i];
+
+                if (selfManaged)
+                {
+                    if (dynamic)
+                        ORCABeacon.Get.defaultBundle.dynamicObstacles.Add(o);
+                    else
+                        ORCABeacon.Get.defaultBundle.staticObstacles.Add(o);
+                }
+
                 o.collisionEnabled = collisionEnabled;
                 o.layerOccupation = layerOccupation;
                 o.baseline = baseline;
@@ -66,20 +82,40 @@ namespace Nebukam.Beacon.ORCA
 
         private void OnDisable()
         {
+            Nebukam.ORCA.Obstacle o;
             for (int i = 0, count = m_obstacles.Count; i < count; i++)
-                m_obstacles[i].collisionEnabled = false;
+            {
+                o = m_obstacles[i];
+                o.collisionEnabled = false;
+
+                if (selfManaged)
+                {
+                    if (dynamic)
+                        ORCABeacon.Get.defaultBundle.dynamicObstacles.Remove(o);
+                    else
+                        ORCABeacon.Get.defaultBundle.staticObstacles.Remove(o);
+                }
+            }
         }
 
         protected int SetObstacleCount(int count)
         {
+            Nebukam.ORCA.Obstacle o;
             int oCount = m_obstacles.Count;
             if(oCount == count) { return count; }
             while(oCount != count)
             {
-                if(oCount < count)
-                    m_obstacles.Add(Pooling.Pool.Rent<Nebukam.ORCA.Obstacle>());
+                if (oCount < count)
+                {
+                    o = Pooling.Pool.Rent<Nebukam.ORCA.Obstacle>();
+                    m_obstacles.Add(o);
+                }
                 else
-                    m_obstacles.Pop().Clear(true);
+                {
+                    o = m_obstacles.Pop();
+                    o.Clear(true);
+                    o.Release();
+                }
                 oCount = m_obstacles.Count;
             }
             return count;
@@ -105,7 +141,21 @@ namespace Nebukam.Beacon.ORCA
 
         private void Update()
         {
-            if (dynamic) { BuildObstacles(); }
+            if (dynamic && alwaysUpdate && collisionEnabled) { BuildObstacles(); }
+        }
+
+        private void OnDestroy()
+        {
+            Nebukam.ORCA.Obstacle o;
+
+            for (int i = 0, count = m_obstacles.Count; i < count; i++)
+            {
+                o = m_obstacles[i];
+                o.Clear(true);
+                o.Release();
+            }
+
+            m_obstacles.Clear();
         }
 
 #if UNITY_EDITOR

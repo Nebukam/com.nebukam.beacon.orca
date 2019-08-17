@@ -1,8 +1,9 @@
 ﻿using Nebukam.ORCA;
+using Unity.Mathematics;
 
 namespace Nebukam.Beacon.ORCA
 {
-    public class ORCABundle<AgentType> : Pooling.PoolItemEx
+    public class ORCABundle<AgentType> : System.IDisposable
         where AgentType : Agent, IAgent, new()
     {
 
@@ -25,17 +26,33 @@ namespace Nebukam.Beacon.ORCA
             m_orca.dynamicObstacles = m_dynamicObstacles;
         }
 
-        public override void Init()
+        public AgentType NewAgent(float3 position)
         {
-
+            return m_agents.Add(position) as AgentType;
         }
 
-        protected override void CleanUp()
+        #region System.IDisposable
+
+        protected virtual void Dispose(bool disposing)
         {
+            if (!disposing) { return; }
+            
             m_agents.Clear(true);
             m_staticObstacles.Clear(true);
             m_dynamicObstacles.Clear(true);
+            m_orca.DisposeAll();
+
         }
+
+        public void Dispose()
+        {
+            // Dispose of unmanaged resources.
+            Dispose(true);
+            // Suppress finalization.
+            System.GC.SuppressFinalize(this);
+        }
+
+        #endregion
 
     }
 }
