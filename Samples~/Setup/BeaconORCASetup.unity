@@ -296,7 +296,7 @@ PrefabInstance:
     - target: {fileID: 1412605251980936957, guid: 942daa7cecd28ea4389d020411caee3b,
         type: 3}
       propertyPath: layerIgnore
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 942daa7cecd28ea4389d020411caee3b, type: 3}
@@ -356,7 +356,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 18.793633, y: -6.8733006}
+  - {x: 18.878405, y: -5.686475}
+  - {x: 19.2552, y: -7.4413033}
   - {x: 18.230042, y: -8.915241}
   - {x: 18.380676, y: -12.634071}
   - {x: 19.69779, y: -15.252984}
@@ -414,7 +415,7 @@ EdgeCollider2D:
   - {x: 16.578537, y: 0.33480644}
   - {x: 19.185938, y: 0.1846466}
   - {x: 20.366869, y: -1.7570429}
-  - {x: 18.843054, y: -6.6606364}
+  - {x: 18.758278, y: -7.2116623}
 --- !u!4 &1591086579
 Transform:
   m_ObjectHideFlags: 0
