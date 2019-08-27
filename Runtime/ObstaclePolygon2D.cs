@@ -42,7 +42,7 @@ namespace Nebukam.Beacon.ORCA
 
             float3 Project(Vector2 pt)
             {
-                float3 proj = Maths.RotateAroundPivot(float3(pt.x + offset.x, pt.y + offset.y, pos.z), float3(false), rot);
+                float3 proj = Maths.RotateAroundPivot(float3(pt.x + offset.x, pt.y + offset.y, pos.z), float3(0f), rot);
                 proj.x += pos.x; proj.y += pos.y; proj.z = pos.z;
                 return proj;
             }
@@ -77,7 +77,7 @@ namespace Nebukam.Beacon.ORCA
 
             float3 Project(Vector2 pt)
             {
-                float3 proj = Maths.RotateAroundPivot(float3(pt.x + offset.x, pt.y + offset.y, pos.z), float3(false), rot);
+                float3 proj = Maths.RotateAroundPivot(float3(pt.x + offset.x, pt.y + offset.y, pos.z), float3(0f), rot);
                 proj.x += pos.x; proj.y += pos.y; proj.z = pos.z;
                 return proj;
             }

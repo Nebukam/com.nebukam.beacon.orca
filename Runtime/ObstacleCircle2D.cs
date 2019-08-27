@@ -41,7 +41,7 @@ namespace Nebukam.Beacon.ORCA
             Nebukam.ORCA.Obstacle o = SetObstacleLength(0, samples);
 
             Vector2 offset = colliderComponent.offset;
-            float3 pos = transform.position, pt = float3(0f, colliderComponent.radius, pos.z), zero = float3(false);
+            float3 pos = transform.position, pt = float3(0f, colliderComponent.radius, pos.z), zero = float3(0f);
             quaternion rot = transform.rotation;
             float inc = Maths.TAU / samples;
 
@@ -65,16 +65,16 @@ namespace Nebukam.Beacon.ORCA
 
         protected override void DrawObstaclePreview(CircleCollider2D component, Color col)
         {
-            
+
             float3 pos = transform.position, refloat3 = float3(0f, component.radius, 0f);
             quaternion rot = transform.rotation;
             float inc = Maths.TAU / samples;
 
             float3 Project(int sample)
             {
-                float3 proj = Maths.RotateAroundPivot(float3(refloat3.x, refloat3.y, pos.z), float3(false), float3(0f, 0f, inc * sample));
+                float3 proj = Maths.RotateAroundPivot(float3(refloat3.x, refloat3.y, pos.z), float3(0f), float3(0f, 0f, inc * sample));
                 proj.x += component.offset.x; proj.y += component.offset.y; proj.z = pos.z;
-                proj = Maths.RotateAroundPivot(proj, float3(false), rot);
+                proj = Maths.RotateAroundPivot(proj, float3(0f), rot);
                 proj.x += pos.x; proj.y += pos.y; proj.z = pos.z;
                 return proj;
             }

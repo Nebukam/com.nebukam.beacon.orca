@@ -66,11 +66,12 @@ namespace Nebukam.Beacon.ORCA
         public bool collisionEnabled = true;
 
         protected Nebukam.ORCA.Agent m_agent = null;
-        public Nebukam.ORCA.Agent agent {
+        public Nebukam.ORCA.Agent agent
+        {
             get { return m_agent; }
             set
             {
-                if(m_agent == value)
+                if (m_agent == value)
                     return;
 
                 if (selfManaged && m_agent != null)
@@ -88,7 +89,7 @@ namespace Nebukam.Beacon.ORCA
 
         private void Awake()
         {
-            
+
         }
 
         public void UpdateAgentSettings()
@@ -144,22 +145,22 @@ namespace Nebukam.Beacon.ORCA
 
         }
 
-        public override void Apply( 
-            ref float3 position, 
-            ref float3 velocity, 
+        public override void Apply(
+            ref float3 position,
+            ref float3 velocity,
             ref float3 heading,
             float sqDistToGoal)
         {
-            if(m_agent == null) { return; }
+            if (m_agent == null) { return; }
 
             if (alwaysUpdate)
                 UpdateAgentSettings();
-            
+
             if (!m_agent.navigationEnabled)
             {
                 m_agent.pos = position;
-                m_agent.prefVelocity = float3(false);
-                m_agent.velocity = float3(false);
+                m_agent.prefVelocity = float3(0f);
+                m_agent.velocity = float3(0f);
                 return;
             }
 

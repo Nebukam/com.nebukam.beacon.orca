@@ -29,7 +29,7 @@ namespace Nebukam.Beacon.ORCA
     [AddComponentMenu("Nebukam/Beacon/ORCA/Obstacle Edge 2D")]
     public class ObstacleEdge2D : ObstacleConverter<EdgeCollider2D>
     {
-        
+
         [Header("Edge (experimental)")]
         [Tooltip("[EXPERIMENTAL] Double-sided edge collides from both sides.")]
         public bool doubleSided = false;
@@ -50,7 +50,7 @@ namespace Nebukam.Beacon.ORCA
 
             float3 Project(Vector2 pt)
             {
-                float3 proj = Maths.RotateAroundPivot(float3(pt.x + offset.x, pt.y + offset.y, pos.z), float3(false), rot);
+                float3 proj = Maths.RotateAroundPivot(float3(pt.x + offset.x, pt.y + offset.y, pos.z), float3(0f), rot);
                 proj.x += pos.x; proj.y += pos.y; proj.z = pos.z;
                 return proj;
             }
@@ -64,7 +64,7 @@ namespace Nebukam.Beacon.ORCA
                 o = SetObstacleLength(1, count);
                 o.edge = true;
                 for (int i = 0; i < count; i++)
-                    o[i].pos = Project(points[count-(i+1)]) + overlap;
+                    o[i].pos = Project(points[count - (i + 1)]) + overlap;
             }
 
         }
@@ -88,7 +88,7 @@ namespace Nebukam.Beacon.ORCA
 
             float3 Project(Vector2 pt)
             {
-                float3 proj = Maths.RotateAroundPivot(float3(pt.x + offset.x, pt.y + offset.y, pos.z), float3(false), rot);
+                float3 proj = Maths.RotateAroundPivot(float3(pt.x + offset.x, pt.y + offset.y, pos.z), float3(0f), rot);
                 proj.x += pos.x; proj.y += pos.y; proj.z = pos.z;
                 return proj;
             }
@@ -96,14 +96,14 @@ namespace Nebukam.Beacon.ORCA
             for (int i = 1, count = points.Length; i < count; i++)
                 DrawSegment(Project(points[i - 1]), Project(points[i]), col);
 
-            if(doubleSided)
+            if (doubleSided)
             {
                 for (int i = 1, count = points.Length; i < count; i++)
-                    DrawSegment(Project(points[count - i]), Project(points[count - (i+1)]), col);
+                    DrawSegment(Project(points[count - i]), Project(points[count - (i + 1)]), col);
             }
 
         }
-    
+
         #endregion
 
 #endif

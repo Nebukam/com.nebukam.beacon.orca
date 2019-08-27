@@ -122,8 +122,8 @@ namespace Nebukam.Beacon.ORCA
         {
             Nebukam.ORCA.Obstacle o;
             int oCount = m_obstacles.Count;
-            if(oCount == count) { return count; }
-            while(oCount != count)
+            if (oCount == count) { return count; }
+            while (oCount != count)
             {
                 if (oCount < count)
                 {
@@ -149,7 +149,7 @@ namespace Nebukam.Beacon.ORCA
             while (oLength != length)
             {
                 if (oLength < length)
-                    o.Add(float3(false));
+                    o.Add(float3(0f));
                 else
                     o.Pop(true);
                 oLength = o.Count;
@@ -227,7 +227,7 @@ namespace Nebukam.Beacon.ORCA
                 for (int i = 1; i < count; i++)
                     DrawSegment(subObstacle[i - 1].pos, subObstacle[i].pos, col);
 
-                if(!subObstacle.edge)
+                if (!subObstacle.edge)
                     DrawSegment(subObstacle[count - 1].pos, subObstacle[0].pos, col);
             }
         }
