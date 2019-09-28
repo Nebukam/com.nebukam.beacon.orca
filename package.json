@@ -1,5 +1,5 @@
 {
-  "name": "com.nebukam.beacon-orca",
+  "name": "com.nebukam.beacon.orca",
   "version": "0.0.1",
   "displayName": "N:Beacon.ORCA",
   "description": "ORCA Implementation for N:Beacon",
@@ -13,7 +13,7 @@
   "author": {
     "name": "Timothe Lapetite",
     "email": "nebukam@gmail.com",
-    "url": "https://github.com/Nebukam/com.nebukam.beacon.git"
+    "url": "https://github.com/Nebukam/com.nebukam.beacon.orca.git"
   },
   "dependencies": {
     "com.unity.mathematics": "1.1.0",
