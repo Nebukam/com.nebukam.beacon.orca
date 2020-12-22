@@ -1,10 +1,10 @@
 {
   "name": "com.nebukam.beacon.orca",
-  "version": "0.0.1",
+  "version": "0.0.1a",
   "displayName": "N:Beacon.ORCA",
   "description": "ORCA Implementation for N:Beacon",
-  "unity": "2019.1",
-  "unityRelease": "10f1",
+  "unity": "2019.4",
+  "unityRelease": "17f1",
   "keywords": [
     "pathfinding",
     "navigation"
@@ -16,7 +16,7 @@
     "url": "https://github.com/Nebukam/com.nebukam.beacon.orca.git"
   },
   "dependencies": {
-    "com.unity.mathematics": "1.1.0",
+    "com.unity.mathematics": "1.2.1",
 	"com.nebukam.common": "https://github.com/Nebukam/com.nebukam.common.git",
 	"com.nebukam.beacon": "https://github.com/Nebukam/com.nebukam.beacon.git",
 	"com.nebukam.orca": "https://github.com/Nebukam/com.nebukam.orca.git"
