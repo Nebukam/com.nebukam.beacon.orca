@@ -16,10 +16,13 @@
     "url": "https://github.com/Nebukam/com.nebukam.beacon.orca.git"
   },
   "dependencies": {
+    "com.unity.mathematics": "1.2.1"
+  },
+  "gitDependencies": {
     "com.unity.mathematics": "1.2.1",
-	"com.nebukam.common": "https://github.com/Nebukam/com.nebukam.common.git#0.0.1",
-	"com.nebukam.beacon": "https://github.com/Nebukam/com.nebukam.beacon.git#0.0.1",
-	"com.nebukam.orca": "https://github.com/Nebukam/com.nebukam.orca.git#1.0.3"
+    "com.nebukam.common": "https://github.com/Nebukam/com.nebukam.common.git#0.0.1",
+    "com.nebukam.beacon": "https://github.com/Nebukam/com.nebukam.beacon.git#0.0.1",
+    "com.nebukam.orca": "https://github.com/Nebukam/com.nebukam.orca.git#1.0.3"
   },
   "samples": [
     {
