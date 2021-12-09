@@ -196,8 +196,10 @@ namespace Nebukam.Beacon.ORCA
 
         protected void DrawSegment(float3 A, float3 B, Color col)
         {
-            float3 nrm = Maths.NormalDir(A, B, float3(0f, 0f, 1f)) * (distance(A, B) * 0.2f),
+            float3 
+                nrm = Maths.NormalDir(A, B, float3(0f, 0f, 1f)) * (distance(A, B) * 0.2f),
                 mid = lerp(A, B, 0.5f);
+
             Nebukam.Common.Editor.Draw.Line(mid, mid + nrm, col.A(0.5f));
             Nebukam.Common.Editor.Draw.Line(A, B, col);
         }
