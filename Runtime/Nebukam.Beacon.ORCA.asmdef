@@ -6,6 +6,7 @@
         "Unity.Jobs",
         "Unity.Mathematics",
         "Nebukam.Common",
+        "Nebukam.Common.Editor",
         "Nebukam.JobAssist",
         "Nebukam.Signals",
         "Nebukam.Beacon",

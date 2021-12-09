@@ -18,11 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using Nebukam.Utils;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using static Unity.Mathematics.math;
+using Nebukam.Common;
 
 namespace Nebukam.Beacon.ORCA
 {
@@ -127,7 +127,7 @@ namespace Nebukam.Beacon.ORCA
             {
                 if (oCount < count)
                 {
-                    o = Pooling.Pool.Rent<Nebukam.ORCA.Obstacle>();
+                    o = Pool.Rent<Nebukam.ORCA.Obstacle>();
                     m_obstacles.Add(o);
                 }
                 else
@@ -198,8 +198,8 @@ namespace Nebukam.Beacon.ORCA
         {
             float3 nrm = Maths.NormalDir(A, B, float3(0f, 0f, 1f)) * (distance(A, B) * 0.2f),
                 mid = lerp(A, B, 0.5f);
-            Draw.Line(mid, mid + nrm, col.A(0.5f));
-            Draw.Line(A, B, col);
+            Nebukam.Common.Editor.Draw.Line(mid, mid + nrm, col.A(0.5f));
+            Nebukam.Common.Editor.Draw.Line(A, B, col);
         }
 
         protected virtual void DrawDebug(Color col)

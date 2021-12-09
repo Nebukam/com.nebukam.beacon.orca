@@ -18,10 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using Nebukam.Utils;
 using Unity.Mathematics;
 using UnityEngine;
 using static Unity.Mathematics.math;
+using Nebukam.Common;
 
 namespace Nebukam.Beacon.ORCA
 {
