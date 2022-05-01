@@ -23,7 +23,7 @@
     "com.unity.mathematics": "1.2.1",
     "com.nebukam.common": "https://github.com/Nebukam/com.nebukam.common.git#0.1.3",
     "com.nebukam.beacon": "https://github.com/Nebukam/com.nebukam.beacon.git#0.0.2",
-    "com.nebukam.orca": "https://github.com/Nebukam/com.nebukam.orca.git#1.1.3"
+    "com.nebukam.orca": "https://github.com/Nebukam/com.nebukam.orca.git#1.1.5"
   },
   "samples": [
     {
