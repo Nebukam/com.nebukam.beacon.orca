@@ -21,9 +21,9 @@
   },
   "gitDependencies": {
     "com.unity.mathematics": "1.2.1",
-    "com.nebukam.common": "https://github.com/Nebukam/com.nebukam.common.git#0.1.4",
-    "com.nebukam.beacon": "https://github.com/Nebukam/com.nebukam.beacon.git#0.0.3",
-    "com.nebukam.orca": "https://github.com/Nebukam/com.nebukam.orca.git#1.1.6"
+    "com.nebukam.common": "https://github.com/Nebukam/com.nebukam.common.git#0.1.5",
+    "com.nebukam.beacon": "https://github.com/Nebukam/com.nebukam.beacon.git#0.0.5",
+    "com.nebukam.orca": "https://github.com/Nebukam/com.nebukam.orca.git#1.1.7"
   },
   "samples": [
     {
