@@ -1,6 +1,6 @@
 {
   "name": "com.nebukam.beacon.orca",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "displayName": "N:Beacon.ORCA",
   "description": "ORCA Implementation for N:Beacon",
   "unity": "2022.1",
@@ -17,13 +17,13 @@
     "url": "https://github.com/Nebukam/com.nebukam.beacon.orca.git"
   },
   "dependencies": {
-    "com.unity.mathematics": "1.2.1"
+    "com.unity.mathematics": "1.3.1"
   },
   "gitDependencies": {
-    "com.unity.mathematics": "1.2.1",
-    "com.nebukam.common": "https://github.com/Nebukam/com.nebukam.common.git#0.1.6",
-    "com.nebukam.beacon": "https://github.com/Nebukam/com.nebukam.beacon.git#0.0.5",
-    "com.nebukam.orca": "https://github.com/Nebukam/com.nebukam.orca.git#1.1.8"
+    "com.unity.mathematics": "1.3.1",
+    "com.nebukam.common": "https://github.com/Nebukam/com.nebukam.common.git#0.1.7",
+    "com.nebukam.beacon": "https://github.com/Nebukam/com.nebukam.beacon.git#0.0.6",
+    "com.nebukam.orca": "https://github.com/Nebukam/com.nebukam.orca.git#1.1.9"
   },
   "samples": [
     {
